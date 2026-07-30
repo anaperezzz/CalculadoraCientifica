@@ -44,6 +44,9 @@ Entre sus características destacan:
 - Sistema de mensajería emergente (`MessageBox.Show()`) para la gestión de alertas.
 
 Todo el diseño visual y la alineación de componentes se encuentra centralizado en:
+```text
+frmCalculadora.Designer.cs
+```
 
 ---
 
@@ -76,27 +79,79 @@ Por defecto, la aplicación permite ejecutar operaciones de dos tipos:
 # Ejecutar el proyecto
 
 Requisitos previos:
+
 - Tener instalado **Visual Studio** (2019 o superior) con la carga de trabajo de **Desarrollo de escritorio de .NET**.
 
 Instrucciones:
 
 1. Clone o descargue este repositorio.
 2. Abra el archivo de solución:
-3. 3. Presione `F5` o haga clic en el botón **Iniciar** dentro de Visual Studio para compilar y ejecutar la aplicación.
+
+`CalculadoraCientifica.sln`
+
+3. Presione `F5` o haga clic en el botón **Iniciar** dentro de Visual Studio para compilar y ejecutar la aplicación.
 
 ---
 
 # Estructura del proyecto
 
+```text
+.
+├── Calculadora.cs
+├── frmCalculadora.cs
+├── frmCalculadora.Designer.cs
+├── Program.cs
+└── CalculadoraCientifica.csproj
+```
 ---
 
 # Reglas de cálculo y validaciones
 
-La aplicación aplica validaciones estrictas antes de ejecutar cualquier operación para prevenir errores de ejecución:
+La aplicación aplica validaciones estrictas en un solo flujo antes de ejecutar cualquier operación para prevenir errores de ejecución:
+
+```csharp
+// 1. Validación de entradas numéricas
+if (!double.TryParse(txtNum1.Text, out double n1) || !double.TryParse(txtNum2.Text, out double n2))
+{
+    MessageBox.Show("Por favor, ingrese valores numéricos válidos.");
+    return;
+}
+
+// 2. Control de excepciones según la operación
+if (operacion == "Dividir" && n2 == 0)
+    MessageBox.Show("No se permite la división entre cero.");
+
+else if (operacion == "RaizCuadrada" && n1 < 0)
+    MessageBox.Show("No existe raíz cuadrada de números negativos.");
+
+else if ((operacion == "Logaritmo" || operacion == "Log10") && n1 <= 0)
+    MessageBox.Show("El logaritmo solo se calcula para números mayores a cero.");
+
+else if (operacion == "Factorial" && n1 < 0)
+    MessageBox.Show("No existe el factorial de números negativos.");
+```
 
 ## Validación de entradas
 
+Se comprueba que los campos no estén vacíos y sean puramente numéricos
+
 ```csharp
-// Se comprueba que los campos no estén vacíos y sean puramente numéricos
-double.TryParse(txtNum1.Text, out numero)
+double numero;
+if (!double.TryParse(txtNum1.Text, out numero))
+{
+    MessageBox.Show("Por favor, ingrese un número válido.");
+    return;
+}
+```
+# Privacidad
+La aplicación opera 100% en modo local sin conexión a Internet.
+
+No recopila, almacena ni transmite ningún dato personal o cálculo realizado a servidores externos.
+
+# Aviso
+Esta aplicación tiene fines strictly académicos y educativos.
+
+Los resultados representan cálculos matemáticos estándar y sirven de apoyo para la resolución de ejercicios técnicos o prácticos.
+
+
 
