@@ -149,7 +149,7 @@ La aplicación opera 100% en modo local sin conexión a Internet.
 No recopila, almacena ni transmite ningún dato personal o cálculo realizado a servidores externos.
 
 # Aviso
-Esta aplicación tiene fines strictly académicos y educativos.
+Esta aplicación tiene fines estrictamente académicos y educativos.
 
 Los resultados representan cálculos matemáticos estándar y sirven de apoyo para la resolución de ejercicios técnicos o prácticos.
 
